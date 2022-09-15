@@ -7,7 +7,7 @@ class HelloSerializers(serializers.Serializer):
     """Serializes a name field for testing our Api View"""
     name = serializers.CharField(max_length=10)
 
-class UserProfileSerialzers(serializers.ModelSerializer):
+class UserProfileSerializers(serializers.ModelSerializer):
 
     """Serializes a user profile object"""
     class Meta:
@@ -38,4 +38,14 @@ class UserProfileSerialzers(serializers.ModelSerializer):
     #         instance.set_password(password)
     #
     #     return super().update(instance, validated_data)
-    #
+
+
+class ProfileFeedItemSerializers(serializers.ModelSerializer):
+    """Serializes profile feed items"""
+
+    class Meta:
+        model = models.ProfileFeedItem
+        fields = ('id','user_profile','status_text','Created_on')
+        extra_kwargs = {
+            'user_profile': {'read_only':True}
+        }
